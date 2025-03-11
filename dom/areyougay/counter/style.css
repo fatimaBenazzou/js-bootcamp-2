@@ -1,0 +1,30 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+}
+#counter {
+    font-size: 3em;
+    margin: 20px;
+}
+.neutral {
+    color: black;
+}
+.positive {
+    color: green;
+}
+.negative {
+    color: red;
+}
+button {
+    font-size: 1.2em;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    /* transition: transform 300ms; */
+}
+
+.fade-in {
+    opacity: 1;
+    transform: translate(0px);
+}
