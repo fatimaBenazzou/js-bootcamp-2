@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>Expense Tracker</h1>
+        <!-- Formulaire pour ajouter des depenses -->
+        <form action="/add" method="post">
+            <input type="text" name="description" placeholder="Description" required />
+            <input type="number" name="amount" placeholder="Amount" required min="0" />
+            <select name="category">
+                <option value="">Select Category</option>
+                <% categories.forEach((category) => { %>
+                <option value="<%=category %>"><%=category %></option>
+                <% }) %>
+            </select>
+            <input type="date" name="date" required />
+            <button type="submit">Add Expense</button>
+        </form>
+
+        <!-- tableau des depenses -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% expenses.forEach((expense) => { %>
+                <tr>
+                    <td><%=expense.description %></td>
+                    <td><%=expense.amount %></td>
+                    <td><%=expense.category %></td>
+                    <td><%=expense.date %></td>
+                    <td>
+                        <a href="/edit/<%= expense.id %>">Edit</a>
+                        <form
+                            action="/delete/<%= expense.id %>"
+                            method="post"
+                            style="display: inline"
+                        >
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </body>
+</html>

@@ -1,13 +1,12 @@
 {
-  "name": "express",
+  "name": "ejs-project",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": " node .",
+    "start": "node .",
     "dev": "nodemon ."
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
