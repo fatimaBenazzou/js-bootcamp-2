@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Expenses Report</title>
+    </head>
+    <body>
+        <header>
+            <h1>Expense Report</h1>
+            <p>Monthly and yearly expense summary</p>
+        </header>
+
+        <form action="/report" method="get">
+            <div>
+                <select name="month">
+                    <option value="">Select Month</option>
+                    <% for(let i = 0; i < 12; i++ ) { %>
+                    <option value="<%= i %>"  <%= i === parseInt(selectedMonth) ? 'selected' : '' %>>
+                        <%= new Date(2023, i).toLocaleString("default", {month: "long"}) %>
+                    </option>
+                    <% } %>
+                </select>
+                <input type="number" name="year" placeholder="Year" value="<%= selectedYear %>">
+            </div>
+            <button type="submit">Generate Report</button>
+        </form>
+
+        <section>
+            <h2>Monthly Summary for <%= new Date(selectedYear, selectedMonth).toLocaleString("default", {month: "long", year: "numeric"}) %></h2>
+            <div>
+                <% Object.keys(summary).forEach((category) => { %>
+                    <% console.log(summary) %>
+                    <div>
+                        <h3><%= category %></h3>
+                        <p><%= summary[category] %></p>
+                    </div>
+                <% }) %>
+            </div>
+        </section>
+    </body>
+</html>

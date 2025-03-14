@@ -4,9 +4,10 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
+        <link rel="stylesheet" href="/public/styles/output.css" />
     </head>
     <body>
-        <h1>Expense Tracker</h1>
+        <h1 class="text-xl font-bold text-red-500">Expense Tracker</h1>
         <!-- Formulaire pour ajouter des depenses -->
         <form action="/add" method="post">
             <input type="text" name="description" placeholder="Description" required />
@@ -19,6 +20,18 @@
             </select>
             <input type="date" name="date" required />
             <button type="submit">Add Expense</button>
+        </form>
+
+        <!-- filtres -->
+        <form action="/filter" method="get">
+            <select name="category">
+                <option value="">Select Category</option>
+                <% categories.forEach((category) => { %>
+                <option value="<%=category %>"><%=category %></option>
+                <% }) %>
+            </select>
+
+            <button type="submit">🔍</button>
         </form>
 
         <!-- tableau des depenses -->
@@ -53,5 +66,7 @@
                 <% }) %>
             </tbody>
         </table>
+
+        <a href="/report">Summary</a>
     </body>
 </html>
