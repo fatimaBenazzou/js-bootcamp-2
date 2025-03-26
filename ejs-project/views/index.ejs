@@ -27,7 +27,7 @@
             <select name="category">
                 <option value="">Select Category</option>
                 <% categories.forEach((category) => { %>
-                <option value="<%=category %>"><%=category %></option>
+                <option value="<%=category %>" <%= category === selectedCategory ? "selected" : "" %>><%=category %></option>
                 <% }) %>
             </select>
 
@@ -51,7 +51,7 @@
                     <td><%=expense.description %></td>
                     <td><%=expense.amount %></td>
                     <td><%=expense.category %></td>
-                    <td><%=expense.date %></td>
+                    <td> <%= new Date(expense.date).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' }) %></td>
                     <td>
                         <a href="/edit/<%= expense.id %>">Edit</a>
                         <form
