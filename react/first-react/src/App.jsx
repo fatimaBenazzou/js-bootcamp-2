@@ -4,6 +4,7 @@
 import PaletteCard from "./components/PaletteCard";
 import "./app.css";
 import { useState } from "react";
+import Counter from "./components/Counter";
 const palettes = [
     {
         from: "#f40076",
@@ -91,11 +92,24 @@ function App() {
 
     return (
         <>
-            {/* <div className="selected" style={{selectedColor ? {background} : undefined}}></div> */}
+            <Counter />
+            <div
+                className="selected"
+                style={selectedColor ? { background: selectedColor } : undefined}
+            ></div>
             <h1>Color Palettes</h1>
             <div className="palettes-grid">
                 {palettes.map((palette, i) => (
-                    <PaletteCard key={"color" + i} from={palette.from} to={palette.to} />
+                    <PaletteCard
+                        onClick={() => {
+                            setSelectedColor(
+                                `linear-gradient(135deg, ${palette.from}, ${palette.to})`
+                            );
+                        }}
+                        key={"color" + i}
+                        from={palette.from}
+                        to={palette.to}
+                    />
                 ))}
             </div>
             {/* <Header />
