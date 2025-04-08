@@ -4,8 +4,8 @@ export default function TodoItem({ todo, deleteTodo, toggleTodoCompletion, editT
     const [editText, setEditText] = useState(todo.text);
 
     const saveEdit = () => {
-        editTodo(todo._id, editText);
-        document.getElementById(`edit-modal-${todo._id}`).close();
+        editTodo(todo.id, editText);
+        document.getElementById(`edit-modal-${todo.id}`).close();
     };
 
     return (
@@ -15,7 +15,7 @@ export default function TodoItem({ todo, deleteTodo, toggleTodoCompletion, editT
                     <input
                         type="checkbox"
                         className="checkbox checkbox-primary"
-                        onChange={() => toggleTodoCompletion(todo._id)}
+                        onChange={() => toggleTodoCompletion(todo.id)}
                         checked={todo.isComplete}
                     />
                     <p className={todo.isComplete ? "line-through text-gray-400" : ""}>
@@ -25,22 +25,20 @@ export default function TodoItem({ todo, deleteTodo, toggleTodoCompletion, editT
                 <div className="flex">
                     <button
                         className="btn btn-ghost btn-sm text-base-content"
-                        onClick={() =>
-                            document.getElementById(`edit-modal-${todo._id}`).showModal()
-                        }
+                        onClick={() => document.getElementById(`edit-modal-${todo.id}`).showModal()}
                     >
                         🖋
                     </button>
                     <button
                         className="btn btn-ghost btn-sm text-base-content"
-                        onClick={() => deleteTodo(todo._id)}
+                        onClick={() => deleteTodo(todo.id)}
                     >
                         ❌
                     </button>
                 </div>
             </li>
 
-            <dialog id={`edit-modal-${todo._id}`} className="modal">
+            <dialog id={`edit-modal-${todo.id}`} className="modal">
                 <div className="modal-box">
                     <h3 className="font-bold text-lg">Edit Todo</h3>
                     <input

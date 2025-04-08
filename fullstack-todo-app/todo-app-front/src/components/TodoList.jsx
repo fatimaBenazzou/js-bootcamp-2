@@ -32,7 +32,7 @@ export default function TodoList({ todos, addTodo, deleteTodo, toggleTodoComplet
             <ul className="card bg-base-100 shadow-lg rounded-lg">
                 {todos.map((todo) => (
                     <TodoItem
-                        key={todo._id}
+                        key={todo.id}
                         todo={todo}
                         deleteTodo={deleteTodo}
                         toggleTodoCompletion={toggleTodoCompletion}
