@@ -1,10 +1,13 @@
 import { useState } from "react";
+import { useTodo } from "../hooks/useTodos";
 
-export default function TodoItem({ todo, deleteTodo, toggleTodoCompletion, editTodo }) {
+export default function TodoItem({ todo }) {
+    const { deleteTodo, toggleTodoCompletion, editTodo } = useTodo();
+
     const [editText, setEditText] = useState(todo.text);
 
     const saveEdit = () => {
-        editTodo(todo._id, editText);
+        editTodo(todo._id, { text: editText });
         document.getElementById(`edit-modal-${todo._id}`).close();
     };
 

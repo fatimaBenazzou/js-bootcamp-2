@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import TodoItem from "./TodoItem";
+import { useTodo } from "../hooks/useTodos";
 
-export default function TodoList({ todos, addTodo, deleteTodo, toggleTodoCompletion, editTodo }) {
+export default function TodoList() {
+    const { todos, addTodo } = useTodo();
     const [newTodoText, setNewTodoText] = useState("");
     const handleAddTodo = () => {
         addTodo(newTodoText);
@@ -31,13 +33,7 @@ export default function TodoList({ todos, addTodo, deleteTodo, toggleTodoComplet
             {/* todo items */}
             <ul className="card bg-base-100 shadow-lg rounded-lg">
                 {todos.map((todo) => (
-                    <TodoItem
-                        key={todo._id}
-                        todo={todo}
-                        deleteTodo={deleteTodo}
-                        toggleTodoCompletion={toggleTodoCompletion}
-                        editTodo={editTodo}
-                    />
+                    <TodoItem key={todo._id} todo={todo} />
                 ))}
             </ul>
         </main>
