@@ -83,10 +83,7 @@ export async function createOrder(req, res) {
 
         await session.commitTransaction();
 
-        res.status(201).json({
-            data: order,
-            message: "Order created successfully",
-        });
+        res.status(201).json(order);
     } catch (e) {
         await session.abortTransaction();
         res.status(400).json({
@@ -101,10 +98,7 @@ export async function getMyOrders(req, res) {
     const user = req.user;
     try {
         const orders = await orderModel.find({ userId: user._id }).populate("cart.productId");
-        res.json({
-            data: orders,
-            message: "Your order has been found successfully",
-        });
+        res.json(orders);
     } catch (e) {
         res.status(400).json({ error: e.message });
     }

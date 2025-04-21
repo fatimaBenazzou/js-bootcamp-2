@@ -2,8 +2,8 @@ import productModel from "../models/product.js";
 
 export async function getProducts(req, res) {
     try {
-        const products = await productModel.find().sort({ createdAt: 1 });
-        res.json({ data: products });
+        const products = await productModel.find();
+        res.json(products);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
@@ -15,7 +15,7 @@ export async function getProduct(req, res) {
 
         if (!product) throw new Error("Product not found");
 
-        res.json({ data: product });
+        res.json(product);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
@@ -24,7 +24,7 @@ export async function getProduct(req, res) {
 export async function createProduct(req, res) {
     try {
         const product = await productModel.create(req.body);
-        res.json({ data: product });
+        res.json(product);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }

@@ -1,5 +1,8 @@
+import { useMutation } from "@tanstack/react-query";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
+import { register as registerApi } from "../../api/endpoints/auth";
+import useUser from "../../hooks/useUser";
 
 // Validation schema with Yup
 const registerSchema = Yup.object().shape({
@@ -15,6 +18,21 @@ const registerSchema = Yup.object().shape({
 });
 
 const Register = () => {
+    const { setUser } = useUser();
+
+    const { mutate: registerAction } = useMutation({
+        mutationFn: registerApi,
+        onSuccess: (response) => {
+            const { token, user } = response.data;
+            localStorage.setItem("token", token);
+            setUser(user);
+            alert(`Welcome ${user.firstName}!`);
+        },
+        onError: (error) => {
+            console.log(error.response.data.error);
+            alert("Registration Failed !");
+        },
+    });
     return (
         <div>
             <h1>Register</h1>
@@ -27,7 +45,9 @@ const Register = () => {
                     confirmPassword: "",
                 }}
                 validationSchema={registerSchema}
-                onSubmit={() => {}}
+                onSubmit={(values) => {
+                    registerAction(values);
+                }}
             >
                 {({ errors, touched }) => (
                     <Form>
